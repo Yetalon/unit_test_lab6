@@ -1,0 +1,55 @@
+# Build Folders
+bin/
+obj/
+out/
+TestResults/
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+# .NET CLI artifacts
+*.deps.json
+*.runtimeconfig.*
+*.pdb
+
+# Publish
+publish/
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+*.lcov
+*.sonarqube
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
