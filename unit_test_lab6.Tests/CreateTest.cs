@@ -16,7 +16,7 @@ public class CreateTests
     [TestMethod]
     public async Task CreateBook()
     {
-        var result = await lib.AddBook("title1", "author1", "1234");
+        var result = await lib.AddBook("", "author1", "1234");
         await lib.AddBook("title2", "author2", "4567");
         Assert.IsTrue(result);
         Assert.AreEqual(2, lib.books.Count);
