@@ -2,9 +2,9 @@ name: .NET CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -12,10 +12,11 @@ jobs:
 
     steps:
     # 1. Check out your code
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     # 2. Install the .NET SDK
-    - name: Setup .NET
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
@@ -24,15 +25,10 @@ jobs:
     - name: Restore test dependencies
       run: dotnet restore unit_test_lab6.Tests/unit_test_lab6.Tests.csproj
 
-    # 4. Build the test project (no need to restore again)
+    # 4. Build the test project (no restore step here)
     - name: Build test project
-      run: dotnet build unit_test_lab6.Tests/unit_test_lab6.Tests.csproj \
-            --configuration Release \
-            --no-restore
+      run: dotnet build unit_test_lab6.Tests/unit_test_lab6.Tests.csproj --configuration Release --no-restore
 
-    # 5. Run MSTest and emit a TRX report
+    # 5. Run MSTest, pointing at the same project
     - name: Run unit tests
-      run: dotnet test unit_test_lab6.Tests/unit_test_lab6.Tests.csproj \
-            --configuration Release \
-            --no-build \
-            --logger "trx;LogFileName=test_results.trx"
+      run: dotnet test unit_test_lab6.Tests/unit_test_lab6.Tests.csproj --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
