@@ -11,26 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # 1. Check out your code
     - uses: actions/checkout@v4
 
+    # 2. Install the .NET SDK
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
 
+    # 3. Restore only your test project’s dependencies
     - name: Restore test dependencies
       run: dotnet restore unit_test_lab6.Tests/unit_test_lab6.Tests.csproj
 
+    # 4. Build the test project (no need to restore again)
     - name: Build test project
-      run: dotnet build \
-            unit_test_lab6.Tests/unit_test_lab6.Tests.csproj \
+      run: dotnet build unit_test_lab6.Tests/unit_test_lab6.Tests.csproj \
             --configuration Release \
             --no-restore
 
+    # 5. Run MSTest and emit a TRX report
     - name: Run unit tests
-      run: |
-        dotnet test \
-          unit_test_lab6.Tests/unit_test_lab6.Tests.csproj \
-          --configuration Release \
-          --no-build \
-          --logger "trx;LogFileName=test_results.trx"
+      run: dotnet test unit_test_lab6.Tests/unit_test_lab6.Tests.csproj \
+            --configuration Release \
+            --no-build \
+            --logger "trx;LogFileName=test_results.trx"
